@@ -251,13 +251,19 @@ body {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.25);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 40px;
   backdrop-filter: blur(6px);
+  z-index: 1000;
 }
+
 
 header h1 {
   font-size: 1.3rem;
