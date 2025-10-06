@@ -3,111 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Torneios</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Login - Plataforma de Torneios</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gradient-to-r from-blue-400 to-blue-600 min-h-screen">
-  <!-- Navbar -->
-  <header class="flex items-center justify-between px-6 py-4 bg-white shadow">
-    <div class="flex space-x-6">
-      <a href="#" class="font-semibold text-blue-600">Torneios</a>
-      <a href="#" class="font-semibold text-blue-600">Inscrições</a>
-      <a href="#" class="font-semibold text-blue-600">Resultados</a>
-    </div>
-    <div class="flex items-center space-x-4">
-      <input type="text" placeholder="Buscar torneio ou jogador..."
-             class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64">
-      <button class="px-4 py-2 bg-blue-500 text-white rounded-xl shadow hover:bg-blue-600">Criar Torneio</button>
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 bg-blue-400 text-white rounded-full flex items-center justify-center">HV</div>
-        <span class="text-blue-700 font-semibold">Hiago</span>
-      </div>
-    </div>
-  </header>
+<body>
+  <div class="container">
+    <h2>Bem-vindo!</h2>
+    <p>Entre para organizar e participar dos torneios</p>
+    <form action="main.html">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="Digite seu e-mail" required>
 
-  <!-- Conteúdo -->
-  <main class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Coluna esquerda -->
-    <div class="space-y-6">
-      <!-- Card Torneio -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <div class="flex justify-between items-center">
-          <h2 class="text-lg font-bold">Campeonato Local de FPS</h2>
-          <span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700">Inscrições abertas</span>
-        </div>
-        <p class="text-gray-600 mt-2">Torneio casual 5v5 - Regras básicas, premiação por equipe.</p>
-        <p class="mt-2"><b>Data:</b> 10/10/2025</p>
-        <p><b>Inscritos:</b> 32</p>
-        <p><b>Formato:</b> Eliminação simples</p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ver</button>
-          <button class="px-4 py-2 rounded-lg border">Editar</button>
-          <button class="px-4 py-2 rounded-lg border">Gerar chaves</button>
-          <button class="px-4 py-2 rounded-lg border">Registrar resultado</button>
-          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Exportar PDF</button>
-        </div>
-      </div>
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Digite sua senha" required>
 
-      <!-- Outro Torneio -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <div class="flex justify-between items-center">
-          <h2 class="text-lg font-bold">Liga Semana Gamer</h2>
-          <span class="text-xs px-2 py-1 rounded-full bg-red-100 text-red-700">Em andamento</span>
-        </div>
-        <p class="text-gray-600 mt-2">Fase de grupos com partidas diárias. Transmissão programada.</p>
-        <p class="mt-2"><b>Início:</b> 01/09/2025</p>
-        <p><b>Inscritos:</b> 128</p>
-        <p><b>Fase:</b> Quartas</p>
-        <div class="mt-4 flex flex-wrap gap-2">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ver</button>
-          <button class="px-4 py-2 rounded-lg border">Editar</button>
-          <button class="px-4 py-2 rounded-lg border">Re-gerar chaves</button>
-          <button class="px-4 py-2 rounded-lg border">Registrar resultado</button>
-          <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Exportar PDF</button>
-        </div>
-      </div>
-
-      <!-- Torneio Finalizado -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <div class="flex justify-between items-center">
-          <h2 class="text-lg font-bold">Copa Comunidade</h2>
-          <span class="text-xs px-2 py-1 rounded-full bg-gray-200 text-gray-600">Finalizado</span>
-        </div>
-        <p class="text-gray-600 mt-2">Torneio amigável com premiação simbólica e divulgação de stream.</p>
-        <p class="mt-2"><b>Data:</b> 15/08/2025</p>
-      </div>
-    </div>
-
-    <!-- Coluna direita -->
-    <div class="lg:col-span-2 space-y-6">
-      <!-- Próximas partidas -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <h2 class="text-lg font-bold mb-2">Próximas partidas</h2>
-        <ul class="text-gray-700 space-y-2">
-          <li><b>10:00</b> - Equipe A vs B (Copa Comunidade)</li>
-          <li><b>12:30</b> - Time X vs Y (Liga Semana)</li>
-          <li><b>15:00</b> - Equipe Alpha vs Beta (Campeonato FPS)</li>
-        </ul>
-        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ver agenda completa</button>
-      </div>
-
-      <!-- Atalhos -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <h2 class="text-lg font-bold mb-2">Atalhos</h2>
-        <div class="flex flex-wrap gap-3">
-          <button class="px-4 py-2 rounded-lg border">Novo Torneio</button>
-          <button class="px-4 py-2 rounded-lg border">Exportar PDF</button>
-          <button class="px-4 py-2 rounded-lg border">Usuários</button>
-        </div>
-      </div>
-
-      <!-- Indicadores -->
-      <div class="bg-white p-4 rounded-2xl shadow">
-        <h2 class="text-lg font-bold mb-2">Indicadores</h2>
-        <p><b>Uptime:</b> 99.9%</p>
-        <p><b>Tempo médio (req):</b> 320ms</p>
-      </div>
-    </div>
-  </main>
+      <button type="submit">Entrar</button>
+    </form>
+    <p style="text-align:center;margin-top:15px;">
+      Não tem conta? <a href="cadastro.html">Cadastre-se</a>
+    </p>
+  </div>
 </body>
 </html>
