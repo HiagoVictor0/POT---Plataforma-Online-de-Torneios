@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Torneios</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Bem-vindo!</h1>
+      <p>Entre para organizar e participar dos torneios</p>
+
+      <!-- Formulário Django -->
+      <form method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input type="email" name="email" placeholder="Digite seu e-mail" required>
+        </div>
+
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <input type="password" name="senha" placeholder="Digite sua senha" required>
+        </div>
+
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+
+      <!-- Link para cadastro -->
+      <p class="link">
+        Não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
+      </p>
+
+      <!-- Mensagens de erro ou sucesso -->
+      {% if messages %}
+        <div style="margin-top:10px;">
+          {% for msg in messages %}
+            <p style="color:red;">{{ msg }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

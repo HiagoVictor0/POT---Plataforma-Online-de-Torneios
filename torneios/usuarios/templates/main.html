@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Inicial | POT</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Plataforma de Torneios</h1>
+    <nav>
+      <a href="{% url 'painel' %}">🏠 Início</a>
+      <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
+      <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
+      <a href="{% url 'resultados' %}">📊 Resultados</a>
+      <a href="{%url 'logout' %}" style="color:#d62828;">🚪 Sair</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Bem-vindo à Plataforma de Organização de Torneios</h2>
+    <p style="text-align:center;margin-top:10px;">
+      Aqui você pode criar, gerenciar e acompanhar torneios com facilidade.<br>
+      Escolha uma opção no menu acima para começar.
+    </p>
+  </main>
+</body>
+</html>

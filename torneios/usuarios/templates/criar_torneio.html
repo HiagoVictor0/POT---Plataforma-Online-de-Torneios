@@ -1,20 +1,22 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Criar Torneio | POT</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
   <header>
     <h1>Plataforma de Torneios</h1>
     <nav>
-      <a href="main.html">🏠 Início</a>
-      <a href="criar_torneio.html">⚒️ Criar Torneio</a>
-      <a href="inscricoes.html">📝 Inscrições</a>
+      <a href="{% url 'painel' %}">🏠 Início</a>
+      <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
+      <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
       <a href="resultados.html">📊 Resultados</a>
-      <a href="login.html" style="color:#d62828;">🚪 Sair</a>
+      <a href="{% url 'login' %}" style="color:#d62828;">🚪 Sair</a>
     </nav>
   </header>
 
