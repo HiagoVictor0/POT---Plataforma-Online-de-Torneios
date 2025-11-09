@@ -75,7 +75,7 @@ def criar_torneio_view(request):
         )
 
         messages.success(request, "Torneio criado com sucesso!")
-        return redirect('painel')
+        return redirect('inscricoes')
 
     return render(request, 'criar_torneio.html')
 

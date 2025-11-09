@@ -15,28 +15,30 @@
       <a href="{% url 'painel' %}">🏠 Início</a>
       <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
       <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
-      <a href="resultados.html">📊 Resultados</a>
+      <a href="{% url 'resultados' %}">📊 Resultados</a>
       <a href="{% url 'login' %}" style="color:#d62828;">🚪 Sair</a>
     </nav>
   </header>
 
   <main class="form-container">
     <h2>Criar Novo Torneio</h2>
-    <form class="form-box" action="inscricoes.html">
+    <form class="form-box" method="POST" action="">
+      {% csrf_token %}
       <label>Nome do Torneio:</label>
-      <input type="text" placeholder="Ex: Copa Gamer 2025" required>
+      <input type="text" name="nome" placeholder="Ex: Copa Gamer 2025" required>
 
       <label>Descrição:</label>
-      <textarea placeholder="Descreva o torneio..." required></textarea>
+      <textarea name="descricao" placeholder="Descreva o torneio..." required></textarea>
 
       <label>Regras:</label>
-      <textarea placeholder="Insira as regras principais" required></textarea>
+      <textarea name="regras" placeholder="Insira as regras principais" required></textarea>
 
       <label>Data:</label>
-      <input type="date" required>
+      <input type="date" name="data" required>
 
       <button type="submit">Criar Torneio</button>
     </form>
+
   </main>
 </body>
 </html>
