@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard da Equipe | POT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Plataforma de Torneios</h1>
+    <nav>
+      <a href="main.html">🏠 Início</a>
+      <a href="criar_torneio.html">⚒️ Criar Torneio</a>
+      <a href="inscricoes.html">📝 Inscrições</a>
+      <a href="resultados.html">📊 Resultados</a>
+      <a href="criar_equipe.html">👥 Criar Equipe</a>
+      <a href="login.html" style="color:#d62828;">🚪 Sair</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Minha Equipe — Team Alpha</h2>
+
+    <section style="margin-bottom:30px;">
+      <h3>Membros</h3>
+      <ul style="list-style:none;padding:0;margin-top:10px;">
+        <li>🎮 João Silva (Capitão)</li>
+        <li>🎮 Maria Santos</li>
+        <li>🎮 Carlos Lima</li>
+        <li>🎮 Ana Costa</li>
+      </ul>
+      <button onclick="window.location.href='criar_equipe.html'">Editar Equipe</button>
+    </section>
+
+    <section>
+      <h3>Próximos Torneios</h3>
+      <div class="result-card">
+        <h4>Copa Gamer 2025</h4>
+        <p><strong>Data:</strong> 12/11/2025</p>
+        <p><strong>Status:</strong> Inscrição confirmada ✅</p>
+        <button onclick="window.location.href='chaveamento.html'">Ver Chaveamento</button>
+      </div>
+
+      <div class="result-card">
+        <h4>Liga FPS Local</h4>
+        <p><strong>Data:</strong> 30/11/2025</p>
+        <p><strong>Status:</strong> Aguardando confirmação ⚙️</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
