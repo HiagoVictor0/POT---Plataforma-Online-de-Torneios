@@ -15,7 +15,9 @@
       <a href="{% url 'painel' %}">🏠 Início</a>
       <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
       <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
-      <a href="{% url 'resultados' %}">📊 Resultados</a>
+      {% if torneios %}
+        <a href="{% url 'chaveamento' torneios.0.id %}">📊 Chaveamento</a>
+      {% endif %}
       <a href="{% url 'login' %}" style="color:#d62828;">🚪 Sair</a>
     </nav>
   </header>

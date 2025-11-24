@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard da Equipe | POT</title>
+  <link rel="stylesheet" href="{% static 'style1.css' %}">
+  <style>
+    .member-item {
+      background-color: #f8faff;
+      padding: 10px 15px;
+      margin: 8px 0;
+      border-left: 4px solid #007bff;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .remove-btn {
+      background-color: #d62828;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .remove-btn:hover {
+      background-color: #a41f1f;
+    }
+
+    .tournament-card {
+      background-color: #f8faff;
+      border-left: 6px solid #28a745;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .add-player-form {
+      background-color: #f8faff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid #007bff;
+    }
+
+    .add-player-form input {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 10px;
+      flex: 1;
+    }
+
+    .add-player-form button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .add-player-form button:hover {
+      background-color: #218838;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Plataforma de Torneios</h1>
+    <nav>
+      <a href="{% url 'painel' %}">🏠 Início</a>
+      <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
+      <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
+      {% if torneios %}
+        <a href="{% url 'chaveamento' torneios.0.id %}">📊 Chaveamento</a>
+      {% endif %}
+      <a href="{% url 'criar_equipe' %}">👥 Criar Equipe</a>
+      <a href="{% url 'logout' %}" style="color:#d62828;">🚪 Sair</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    {% if messages %}
+      {% for message in messages %}
+        <div style="padding: 10px; margin-bottom: 15px; border-radius: 5px; {% if message.tags == 'error' %}background-color: #f8d7da; color: #721c24;{% else %}background-color: #d4edda; color: #155724;{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <h2>Minha Equipe — {{ equipe.nome }}</h2>
+
+    <section style="margin-bottom:30px;">
+      <h3>Informações da Equipe</h3>
+      <div style="background-color: #f8faff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+        <p><strong>Jogo Principal:</strong> {{ equipe.jogo_principal }}</p>
+        <p><strong>Descrição:</strong> {{ equipe.descricao }}</p>
+        <p><strong>Criada em:</strong> {{ equipe.data_criacao|date:"d/m/Y H:i" }}</p>
+      </div>
+      {% if eh_criador %}
+        <a href="{% url 'criar_equipe' %}"><button style="background-color: #007bff; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">Editar Equipe</button></a>
+      {% endif %}
+    </section>
+
+    <section style="margin-bottom:30px;">
+      <h3>Membros ({{ jogadores.count }})</h3>
+      
+      {% if eh_criador %}
+        <div class="add-player-form">
+          <form method="POST" class="form-row">
+            {% csrf_token %}
+            <input type="hidden" name="acao" value="adicionar_jogador">
+            <input type="text" name="nome_jogador" placeholder="Digite o nome do jogador..." required>
+            <button type="submit">Adicionar Jogador</button>
+          </form>
+        </div>
+      {% endif %}
+
+      <ul style="list-style:none;padding:0;margin-top:10px;">
+        {% for jogador in jogadores %}
+          <div class="member-item">
+            <span>
+              {% if jogador.eh_capitao %}
+                👨‍✈️ {{ jogador.nome }} (Capitão)
+              {% else %}
+                🎮 {{ jogador.nome }}
+              {% endif %}
+            </span>
+            {% if eh_criador and not jogador.eh_capitao %}
+              <form method="POST" style="margin: 0;">
+                {% csrf_token %}
+                <input type="hidden" name="acao" value="remover_jogador">
+                <input type="hidden" name="jogador_id" value="{{ jogador.id }}">
+                <button type="submit" class="remove-btn">Remover</button>
+              </form>
+            {% endif %}
+          </div>
+        {% empty %}
+          <p style="color: #666;">Nenhum membro adicionado ainda.</p>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h3>Inscrições em Torneios</h3>
+      {% if inscricoes %}
+        {% for inscricao in inscricoes %}
+          <div class="tournament-card">
+            <h4>{{ inscricao.torneio.nome }}</h4>
+            <p><strong>Data:</strong> {{ inscricao.torneio.data|date:"d/m/Y" }}</p>
+            <p><strong>Status:</strong> 
+              {% if inscricao.confirmada %}
+                ✅ Inscrição confirmada
+              {% else %}
+                ⚙️ Aguardando confirmação
+              {% endif %}
+            </p>
+            <p><strong>Fase:</strong> <span style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px;">{{ inscricao.torneio.get_status_display }}</span></p>
+            
+            {% if inscricao.torneio.status == 'chaveamento' or inscricao.torneio.status == 'em_progresso' or inscricao.torneio.status == 'finalizado' %}
+              <a href="{% url 'chaveamento' inscricao.torneio.id %}">
+                <button style="background-color: #007bff; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">Ver Chaveamento</button>
+              </a>
+            {% endif %}
+          </div>
+        {% empty %}
+          <p style="color: #666;">Sua equipe ainda não está inscrita em nenhum torneio.</p>
+        {% endfor %}
+      {% else %}
+        <p style="color: #666;">Sua equipe ainda não está inscrita em nenhum torneio.</p>
+      {% endif %}
+    </section>
+
+    <div style="margin-top: 40px;">
+      <a href="{% url 'painel' %}"><button style="background-color: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Voltar ao Painel</button></a>
+    </div>
+  </main>
+</body>
+</html>

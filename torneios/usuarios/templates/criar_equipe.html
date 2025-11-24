@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Equipe | POT</title>
+  <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+<body>
+  <header>
+    <h1>Plataforma de Torneios</h1>
+    <nav>
+      <a href="{% url 'painel' %}">🏠 Início</a>
+      <a href="{% url 'criar_torneio' %}">⚒️ Criar Torneio</a>
+      <a href="{% url 'inscricoes' %}">📝 Inscrições</a>
+      {% if torneios %}
+        <a href="{% url 'chaveamento' torneios.0.id %}">📊 Chaveamento</a>
+      {% endif %}
+      <a href="{% url 'dashboard_equipe' %}">🧑‍💼 Minha Equipe</a>
+      <a href="{% url 'logout' %}" style="color:#d62828;">🚪 Sair</a>
+    </nav>
+  </header>
+
+  <main class="form-container">
+    <h2>Criar Equipe</h2>
+    
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" style="padding: 10px; margin-bottom: 15px; border-radius: 5px; {% if message.tags == 'error' %}background-color: #f8d7da; color: #721c24;{% else %}background-color: #d4edda; color: #155724;{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form class="form-box" method="POST">
+      {% csrf_token %}
+      
+      <label for="nomeEquipe">Nome da Equipe:</label>
+      <input type="text" id="nomeEquipe" name="nome_equipe" placeholder="Ex: Team Alpha" required>
+
+      <label for="jogoPrincipal">Jogo Principal:</label>
+      <select id="jogoPrincipal" name="jogo_principal" required>
+        <option selected disabled>Selecione o jogo</option>
+        <option value="Valorant">Valorant</option>
+        <option value="CS2">CS2</option>
+        <option value="League of Legends">League of Legends</option>
+        <option value="Dota 2">Dota 2</option>
+        <option value="Fortnite">Fortnite</option>
+      </select>
+
+      <label for="descricao">Descrição:</label>
+      <textarea id="descricao" name="descricao" placeholder="Fale um pouco sobre sua equipe..." required></textarea>
+
+      <button type="submit">Criar Equipe</button>
+    </form>
+  </main>
+</body>
+</html>
